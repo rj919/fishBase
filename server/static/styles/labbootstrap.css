@@ -14,6 +14,7 @@ body {
   margin: 0;
   background: #22354c !important;
   color: #ffffff !important;
+  height: 100%;
 }
 article,
 aside,
@@ -1424,6 +1425,11 @@ a.bg-danger:hover {
   min-height: 40px;
   margin-bottom: 10px;
   border: 1px solid transparent;
+}
+.footer {
+    bottom: 0px;
+    margin-left: 10px;
+    position: absolute;
 }
 ul,
 ol {

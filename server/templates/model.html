@@ -1,0 +1,9 @@
+{% extends "wrapper.html" %}
+{% block title %}{{ modelTitle }}{% endblock %}
+{% block content %}
+  <p id="model-format">
+      {% if modelDetails %}
+        {{ modelDetails }}
+      {% endif %}
+  </p>
+{% endblock %}
