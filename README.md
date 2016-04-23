@@ -1,5 +1,5 @@
 # fishBase
-_Source code for an open database for storing fishery data_  
+_Source code for a database for open fishery data_  
 **by [RJ](https://github.com/rj919)**
 
 ## Components
