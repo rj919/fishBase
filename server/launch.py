@@ -18,7 +18,7 @@ def dashboard_page():
     return render_template('landing.html'), 200
 
 @app.route('/v1/operation/model')
-def operation_validate():
+def operation_model():
     valid_response, code = operationResource.request.validate(request)
     if code:
         return jsonify(valid_response), code
@@ -31,29 +31,29 @@ def operation_validate():
     return render_template('model.html', modelTitle=model_title, modelDetails=model_details), 200
 
 @app.route('/v1/catch/model')
-def operation_validate():
-    valid_response, code = operationResource.request.validate(request)
+def catch_model():
+    valid_response, code = catchResource.request.validate(request)
     if code:
         return jsonify(valid_response), code
     request_dict = {'headers': {}, 'body': request.form}
     for key, value in request.headers.items():
         request_dict['headers'][key] = value
     app.logger.debug('Headers: %s' % request_dict)
-    model_details = operationResource.model.schema
-    model_title = operationResource.model.title
+    model_details = catchResource.model.schema
+    model_title = catchResource.model.title
     return render_template('model.html', modelTitle=model_title, modelDetails=model_details), 200
 
 @app.route('/v1/specimen/model')
-def operation_validate():
-    valid_response, code = operationResource.request.validate(request)
+def specimen_model():
+    valid_response, code = specimenResource.request.validate(request)
     if code:
         return jsonify(valid_response), code
     request_dict = {'headers': {}, 'body': request.form}
     for key, value in request.headers.items():
         request_dict['headers'][key] = value
     app.logger.debug('Headers: %s' % request_dict)
-    model_details = operationResource.model.schema
-    model_title = operationResource.model.title
+    model_details = specimenResource.model.schema
+    model_title = specimenResource.model.title
     return render_template('model.html', modelTitle=model_title, modelDetails=model_details), 200
 
 @app.errorhandler(404)
