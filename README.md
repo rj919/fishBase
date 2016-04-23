@@ -1,6 +1,6 @@
 # fishBase
 _The source code for an open database for storing fishery data_  
-**by [Collective Acuity](https://collectiveacuity.com)**
+**by [RJ](https://github.com/rj919)**
 
 ## Components
 - Alpine Edge (OS)
