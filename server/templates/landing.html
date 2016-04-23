@@ -1,0 +1,11 @@
+{% extends "wrapper.html" %}
+{% block title %}Landing{% endblock %}
+{% block content %}
+  <h2>Collective Acuity</h2>
+  <p id="welcome-message">
+      {% if userName %}
+        Welcome to the laboratory, {{ userName }}.
+      {% else %}
+        Welcome to the laboratory.
+      {% endif %}
+{% endblock %}

@@ -1,0 +1,239 @@
+# DOCKER TUTORIAL
+
+# OVERVIEW OF WORKFLOW
+# https://www.docker.com/tryit/#
+# install docker VE manager (boot2docker + virtualbox for Windows)
+# pull container from personal or public repo
+# open up a terminal inside container
+# make changes, add code, install files
+# exit container, commit changes & push updated container
+# deploy container on server (or local host) with daemon and/or open ports
+### map a data volume on server (or local host) to a data source container
+### link other containers to the data source container
+### create a dockerfile in root directory to script image build 
+### synchronize a bitbucket or github repo with docker account to autobuild
+
+
+# BASIC COMMANDS
+# help
+docker help
+
+# search docker repository for images (base processes of containers)
+docker images
+docker search <image>
+
+# pull an image from docker repository
+docker pull <username>/<repo name>
+
+# start a container from an image by running a process on it
+# containers stops running when process ends
+docker run <repo name> echo 'hello world'
+docker run <repo name> apt-get install -y ping 
+
+# start a container from an image by creating it with a name
+docker create -d --name ubuntu ubuntu:14.04
+
+# discover id of container where last process was run
+docker ps -l
+
+# commit changes to image
+docker commit <first few digits of container ID> <repo name>
+
+# commit changes with notes
+docker commit -m "message" -a "author" <container id> <user id>/<image name>:<image tag>
+
+# docker returns new ID of updated image (container)
+
+# inspect attributes of a container or image
+# returns a json formatted document
+docker inspect <first few digits of container ID>
+
+# add a tag to an image
+docker tag <image id> <user id>/<repo name>:<tag>
+
+# login to docker (command in boot2docker for windows)
+docker login --email='<my email>' --password='<my pass>' --username='<my id>'
+
+# push the image to the registry
+docker push <repo name>
+
+
+# https://docs.docker.com/userguide/dockerizing/
+
+# start a container in the background
+# returns container id as SHA256 hash
+docker run -d -i <repo name>
+
+# open a bash shell inside an existing container
+docker exec -i -t <image id> bin/bash
+
+# open up a bash shell inside a new docker container
+# -t assigns a pseudo-tty (terminal) inside the container
+# -i allows an interactive connection
+# --rm removes the container once the process is closed
+docker run -t -i --rm <repo name> bin/bash
+
+# while in the bash shell inside a container, use normal linux 
+ls
+mkdir test
+cd test
+touch test.txt
+cd /
+rm test -r
+exit
+
+# create a daemon process out of an image
+# -d takes an image and turns it into a daemon
+# bin/sh -c creates a shell script with unix code from sh.exe file in /bin/
+docker run -d ubuntu:14.04 bin/sh -c "while true; do echo hello world; sleep 1; done"
+
+# discover container processes currently running
+docker ps -a
+
+# check log of a container
+docker logs <container id>
+
+# stop a container
+docker stop <container id>
+
+# start an existing container
+docker start <container id>
+
+# stop and restart a container
+docker restart <container id>
+
+# delete an container (must be stopped)
+docker rm <container id>
+
+# stop and delete a container
+docker rm -f <container id>
+
+# stop and delete all containers
+docker rm -f $(docker ps -a -q)
+
+# delete the last container with a data volume
+docker rm -v <container id>
+
+# delete an image
+docker rmi <image id>
+
+# delete all images
+docker rmi -f $(docker images -q)
+
+# create a sample python web app container
+# -d take a container and turns it into a daemon
+# -P maps the network ports inside a container to a high port on the host
+# -p 8000:5000 maps the port 5000 in the container to port 8000 on the host
+# -p 192.168.59.103:8000:5000 maps the container port 5000 to the IP port 8000
+# --name adds a customized name to a container
+docker run -d -P -i --name web training/webapp python app.py
+
+
+# https://docs.docker.com/userguide/dockerlinks/
+
+# link a container to another container
+# linking exposes one container to another without an external connection
+# linking allows recepient to view environmental variables of source
+# -- link <container name>:<alias> creates a link to that container
+# env lists the environmental variables of source
+docker run -d --name db training/postgres
+docker run -d -P --name web --link db:db training/webapp python app.py env
+
+# windows uses boot2docker IP address as localhost
+boot2docker ip
+
+# lookup port address of running container
+docker port <container id> 5000
+
+# inspect the running container in a webbrowser
+# http://<boot2docker ip>:<port>
+
+# view the standard output of a request on the container
+docker logs -f <container id>
+
+# view the processes running in a container
+docker top <container id>
+
+# view IP address of container
+docker inspect -f '{{ .NetworkSettings.IPAddress }}' <container id>
+
+# view name of container
+docker inspect -f '{{ .Name }}' <container id>
+
+# view linked containers
+docker inspect -f '{{ .HostConfig.Links }}' <container name>
+
+# view environmental variables of source container linked to recipient
+# does so by creating a dummy recepient
+docker run --rm --name web2 --link db:db training/webapp env
+
+# view /etc/hosts file inside container to discover IP address of link
+cat /etc/hosts
+
+
+# MAPPING DATA VOLUMES
+# https://docs.docker.com/userguide/dockervolumes/
+# data volumes persist beyond containers
+
+# add a data volume to a container
+docker run -d -P --name web -v /<container data path> training/webapp python app.py
+
+# mount a host directory as a data volume inside a container (in windows)
+docker create --name db -v //c/Users/<windows user>/<data path>:/<container data path> training/postgres bin/true
+
+# mount a host file as a data volume inside the container (in windows)
+docker run -i -t --name op -v //c/Users/<windows user>/<data path>/<filename>:/<container data path>/<filename> ubuntu:14.04 bin/bash
+
+# mount a host directory as a read-only data volume (in windows)
+docker run -d -P --name web -v //c/Users/<windows user>/<data path>:/<container data path>:ro training/webapp python app.py
+
+# map a data volume from inside another container
+docker run -d --volumes-from <source container name> --name <container name> training/postgres
+# or
+docker run -i -t --volumes-from <source container name> --name op ubuntu:14.04 bin/bash
+
+# backup data volume inside a container to a tar inside the container (in windows)
+docker run --volumes-from <source container name> -v //backup:/backup ubuntu14:04 tar cvf //backup/backup.tar //<container data path>
+
+# copy backup file to host local directory (in windows)
+# prompts for confirmation on initial transfer
+scp -i ~/.ssh/id_boot2docker docker@$(boot2docker ip):/backup/backup.tar .
+
+
+# build configuration instructions into Dockerfile
+
+# create Dockerfile for image build instructions
+mkdir <sub-directory>
+cd <sub-directory>
+touch Dockerfile
+emacs Dockerfile
+
+# Comment section
+FROM ubuntu:14.04
+MAINTAINER Richard <richard@collectiveacuity.com>
+RUN apt-get update
+RUN apt-get install -y emacs
+RUN apt-get install -y git
+RUN apt-get install -y cron
+RUN apt-get install -y python3-pip
+RUN pip3 install python-dateutil
+RUN pip3 install twilio
+RUN pip3 install mandrill
+RUN pip3 install virtualenv
+# VOLUME 
+
+# build Dockerfile as image
+# . specifies local directory
+docker build -t <user id>/<repo name>:<tag> .
+
+# build Dockerfile without caches
+docker build --no-cache=true -t <image name> .
+
+# login to docker (command in boot2docker for windows)
+docker login --email='<my email>' --password='<my pass>' --username='<my id>'
+
+# push the image to the registry
+docker push <repo name>
+
+
+

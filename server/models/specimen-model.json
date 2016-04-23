@@ -1,0 +1,17 @@
+{
+  "title": "Fishackathon: Specimen Object",
+  "description": "Details concerning an individual specimen such as age, length, weight, sex, maturity and more.",
+  "schema": {
+    "specimenID": "",
+    "dT": 14000000.0000,
+    "userID": "",
+    "details": {
+      "species_details": {
+
+      },
+      "specimen_details": {
+
+      }
+    }
+  }
+}

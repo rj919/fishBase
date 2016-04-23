@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/labbootstrap.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <meta name="p:domain_verify" content="10787124251d8b6c310d9c5d44863953"/>
+    <meta charset="UTF-8">
+    <title>Lab - {% block title %}{% endblock %}</title>
+    {% endblock %}
+</head>
+  <body>
+    <div id="content">{% block content %}{% endblock %}</div>
+    <div id="footer">
+      {% block footer %}
+      &copy; Copyright 2015-2016 by <a href="/">Collective Acuity</a>.
+      {% endblock %}
+    </div>
+  </body>
+</html>

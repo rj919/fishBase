@@ -1,0 +1,75 @@
+# Docker HFE Commands
+
+# Dockerfile & .dockerignore file locations
+cd Dropbox/Projects/CollectiveAcuity/HFE/code/processor
+cd Dropbox/Projects/CollectiveAcuity/HFE/code/db
+cd Dropbox/Projects/CollectiveAcuity/HFE/code/app
+
+# Edit Dockerfile, commit to Git and push to BitBucket
+# https://rj88@bitbucket.org/rj88/hfe.git
+
+# Pull latest image from Docker Hub Automated Build from BitBucket
+docker pull rc42/hfe-processor
+docker pull rc42/hfe-db
+docker pull rc42/hfe-app
+
+# Start processor container with processor volume from top code directory
+docker run --name processor -d -i -v /"$(pwd)"/processor/monitor:/processor/monitor rc42/hfe-processor
+
+# Start app container with all volumes
+# Main server exposed at 1337
+docker run --name app -d -i -p 35000:1337 rc42/hfe-app
+
+# Start app container with docker compose from top code directory
+docker run -v /"$(pwd)"/app:/app -v //var/run/docker.sock:/var/run/docker.sock -it --rm dduportal/docker-compose:latest
+
+# Access containers
+docker exec -it processor bash
+docker exec -it app bash
+
+# Docker Compose Notes
+# https://registry.hub.docker.com/u/dduportal/docker-compose/
+# https://stackoverflow.com/questions/29289785/how-to-install-docker-compose-on-windows
+
+# Start db container
+docker run --name cassandradb -v //c/Users/rcjames14/Dropbox/Projects/CollectiveAcuity/HFE/code/db:/var/lib/cassandra/data -d rc42/hfe-db
+
+# View environmental variables of db through a temporay dummy
+docker run --rm --name dummy --link cassandradb:cassandra rc42/ubuntu:hfe-processor env
+
+# Access processor container
+docker exec -i -t processor bin/bash
+
+# View /etc/hosts file inside container to discover IP address of link
+cat /etc/hosts
+
+
+
+# **** Cleanup *****
+# delete all containers
+docker rm -f $(docker ps -a -q)
+
+
+# ***** Old Methods *****
+# Build db image from Dockerfile
+cd Dropbox/Projects/CollectiveAcuity/HFE/code/db
+docker build -t rc42/cassandra:hfe-db .
+
+# Build processor image from Dockerfile
+cd Dropbox/Projects/CollectiveAcuity/HFE/code/processor
+docker build -t rc42/ubuntu:hfe-processor .
+
+# Login to docker
+docker login --email='<my email>' --password='<my pass>' --username='<my id>'
+
+# Push latest image to Docker Hub
+docker push rc42/ubuntu:hfe-processor
+docker push rc42/cassandra:hfe-db
+
+# Pull latest image from Docker Hub
+docker pull rc42/ubuntu:hfe-processor
+docker pull rc42/cassandra:hfe-db
+
+
+
+

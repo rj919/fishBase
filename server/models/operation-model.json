@@ -1,0 +1,20 @@
+{
+  "title": "Fishackathon: Operation Object",
+  "description": "Details specifying information about the vessel operation such as start/end date, time and latitude/longitude, name of vessel, vessel operator, gear used, permit numbers etc...",
+  "schema": {
+    "operationID": "",
+    "dT": 14000000.0000,
+    "userID": "",
+    "details": {
+      "vessel_details": {
+
+      },
+      "crew_details": {
+
+      },
+      "location_details": {
+
+      }
+    }
+  }
+}
