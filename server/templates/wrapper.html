@@ -4,17 +4,46 @@
     {% block head %}
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/labbootstrap.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
-    <meta name="p:domain_verify" content="10787124251d8b6c310d9c5d44863953"/>
     <meta charset="UTF-8">
     <title>fishBase : {% block title %}{% endblock %}</title>
     {% endblock %}
 </head>
   <body>
+    <div id="header" class="page-header">
+        {% block header %}
+            <h2 id="page-title" class="page-title">fishBase</h2>
+            <div id="logo" class="page-logo">
+                <img class="page-logo" src="{{ url_for('static', filename='images/fishackathon_logo.png') }}">
+            </div>
+        {% endblock %}
+    </div>
+    <div id="navigation" class="navbar">
+        {% block navigation %}
+            <div id="link-table" class="table-responsive">
+                <table class="table">
+                    <tr>
+                        <td>
+                            Share your catch...
+                        </td>
+                        <td>
+                            <a href="/v1/operation/model">operation</a>
+                        </td>
+                        <td>
+                            <a href="/v1/catch/model">catch</a>
+                        </td>
+                        <td>
+                            <a href="/v1/specimen/model">specimen</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        {% endblock %}
+    </div>
     <div id="content">{% block content %}{% endblock %}</div>
     <div id="footer">
-      {% block footer %}
-        A <a href="http://www.fishackathon.co">fishackathon</a> creation.
-      {% endblock %}
+        {% block footer %}
+            A <a href="http://www.fishackathon.co">fishackathon</a> creation.
+        {% endblock %}
     </div>
   </body>
 </html>

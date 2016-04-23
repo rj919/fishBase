@@ -12,6 +12,8 @@ html {
 }
 body {
   margin: 0;
+  background: #22354c !important;
+  color: #ffffff !important;
 }
 article,
 aside,
@@ -1342,7 +1344,7 @@ mark,
   color: #777;
 }
 .text-primary {
-  color: #337ab7;
+  color: #fff;
 }
 a.text-primary:hover {
   color: #286090;
@@ -1404,8 +1406,24 @@ a.bg-danger:hover {
 }
 .page-header {
   padding-bottom: 9px;
-  margin: 40px 0 20px;
+  height: 60px;
+  margin: 10px 0 10px;
   border-bottom: 1px solid #eee;
+}
+.page-logo {
+  padding-bottom: 9px;
+  height: 60px;
+  float: right;
+}
+.page-title{
+  height: 30px;
+  margin-left: 10px;
+  float: left;
+}
+.navbar {
+  min-height: 40px;
+  margin-bottom: 10px;
+  border: 1px solid transparent;
 }
 ul,
 ol {
@@ -2269,7 +2287,7 @@ th {
   padding: 8px;
   line-height: 1.42857143;
   vertical-align: top;
-  border-top: 1px solid #ddd;
+
 }
 .table > thead > tr > th {
   vertical-align: bottom;
@@ -4065,12 +4083,6 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   margin-top: -1px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-}
-.navbar {
-  position: relative;
-  min-height: 50px;
-  margin-bottom: 20px;
-  border: 1px solid transparent;
 }
 @media (min-width: 768px) {
   .navbar {
