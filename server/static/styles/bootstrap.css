@@ -12,9 +12,6 @@ html {
 }
 body {
   margin: 0;
-  background: #22354c !important;
-  color: #ffffff !important;
-  height: 100%;
 }
 article,
 aside,
@@ -1345,7 +1342,7 @@ mark,
   color: #777;
 }
 .text-primary {
-  color: #fff;
+  color: #337ab7;
 }
 a.text-primary:hover {
   color: #286090;
@@ -1407,29 +1404,8 @@ a.bg-danger:hover {
 }
 .page-header {
   padding-bottom: 9px;
-  height: 60px;
-  margin: 10px 0 10px;
+  margin: 40px 0 20px;
   border-bottom: 1px solid #eee;
-}
-.page-logo {
-  padding-bottom: 9px;
-  height: 60px;
-  float: right;
-}
-.page-title{
-  height: 30px;
-  margin-left: 10px;
-  float: left;
-}
-.navbar {
-  min-height: 40px;
-  margin-bottom: 10px;
-  border: 1px solid transparent;
-}
-.footer {
-    bottom: 0px;
-    margin-left: 10px;
-    position: absolute;
 }
 ul,
 ol {
@@ -2293,7 +2269,7 @@ th {
   padding: 8px;
   line-height: 1.42857143;
   vertical-align: top;
-
+  border-top: 1px solid #ddd;
 }
 .table > thead > tr > th {
   vertical-align: bottom;
@@ -4090,6 +4066,12 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+.navbar {
+  position: relative;
+  min-height: 50px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+}
 @media (min-width: 768px) {
   .navbar {
     border-radius: 4px;
@@ -4414,7 +4396,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-default {
-  background-color: #f8f8f8;
+  background-color: #ffffff;
   border-color: #e7e7e7;
 }
 .navbar-default .navbar-brand {
@@ -4877,7 +4859,7 @@ a.badge:focus {
   padding: 30px 15px;
   margin-bottom: 30px;
   color: inherit;
-  background-color: #eee;
+  background-color: #ffffff;
 }
 .jumbotron h1,
 .jumbotron .h1 {

@@ -26,9 +26,8 @@ def operation_model():
     for key, value in request.headers.items():
         request_dict['headers'][key] = value
     app.logger.debug('Headers: %s' % request_dict)
-    model_details = operationResource.model.schema
-    model_title = operationResource.model.title
-    return render_template('model.html', modelTitle=model_title, modelDetails=model_details), 200
+    model_details = operationResource.model
+    return render_template('model.html', modelDetails=model_details), 200
 
 @app.route('/v1/catch/model')
 def catch_model():
@@ -39,9 +38,8 @@ def catch_model():
     for key, value in request.headers.items():
         request_dict['headers'][key] = value
     app.logger.debug('Headers: %s' % request_dict)
-    model_details = catchResource.model.schema
-    model_title = catchResource.model.title
-    return render_template('model.html', modelTitle=model_title, modelDetails=model_details), 200
+    model_details = catchResource.model
+    return render_template('model.html', modelDetails=model_details), 200
 
 @app.route('/v1/specimen/model')
 def specimen_model():
@@ -52,9 +50,8 @@ def specimen_model():
     for key, value in request.headers.items():
         request_dict['headers'][key] = value
     app.logger.debug('Headers: %s' % request_dict)
-    model_details = specimenResource.model.schema
-    model_title = specimenResource.model.title
-    return render_template('model.html', modelTitle=model_title, modelDetails=model_details), 200
+    model_details = specimenResource.model
+    return render_template('model.html', modelDetails=model_details), 200
 
 @app.errorhandler(404)
 def page_not_found(error):

@@ -1,5 +1,5 @@
 {
-  "title": "Fishackathon: Specimen Object",
+  "title": "Specimen Data",
   "description": "Details concerning an individual specimen such as age, length, weight, sex, maturity and more.",
   "schema": {
     "specimenID": "",

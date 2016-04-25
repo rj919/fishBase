@@ -1,5 +1,5 @@
 {
-  "title": "Fishackathon: Operation Object",
+  "title": "Operation Data",
   "description": "Details specifying information about the vessel operation such as start/end date, time and latitude/longitude, name of vessel, vessel operator, gear used, permit numbers etc...",
   "schema": {
     "operationID": "",

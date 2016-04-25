@@ -2,48 +2,41 @@
 <html lang="en">
 <head>
     {% block head %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/labbootstrap.css') }}">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/fishbase.css') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='images/fishackathon_favicon.png') }}">
     <meta charset="UTF-8">
     <title>fishBase : {% block title %}{% endblock %}</title>
     {% endblock %}
 </head>
   <body>
-    <div id="header" class="page-header">
-        {% block header %}
-            <h2 id="page-title" class="page-title">fishBase</h2>
-            <div id="logo" class="page-logo">
-                <img class="page-logo" src="{{ url_for('static', filename='images/fishackathon_logo.png') }}">
-            </div>
-        {% endblock %}
+    <div class="container-fluid">
+        <div id="header" class="navbar">
+            {% block header %}
+                <div id="header_logo"><a class="navbar-brand" href="/">fishBase</a></div>
+                <div id="header_subtitle" class="navbar-subtitle">a database for open fishery data</div>
+            {% endblock %}
+        </div>
     </div>
-    <div id="navigation" class="navbar">
-        {% block navigation %}
-            <div id="link-table" class="table-responsive">
-                <table class="table">
-                    <tr>
-                        <td>
-                            Share your catch...
-                        </td>
-                        <td>
-                            <a href="/v1/operation/model">operation</a>
-                        </td>
-                        <td>
-                            <a href="/v1/catch/model">catch</a>
-                        </td>
-                        <td>
-                            <a href="/v1/specimen/model">specimen</a>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        {% endblock %}
+    <div class="container">
+        <div id="content" class="row">
+            <div id="navigation" class="col-xs-3">
+                <div id="nav_title" class="h4">Share your catch...</div>
+                    <div id="nav_links">
+                        <div id="nav_operation"><a class="h4 navbox-text" href="/v1/operation/model">operation</a></div>
+                        <div id="nav_catch"><a class="h4 navbox-text" href="/v1/catch/model">catch</a></div>
+                        <div id="nav_specimen"><a class="h4 navbox-text" href="/v1/specimen/model">specimen</a></div>
+                    </div>
+                </div>
+            {% block content %}{% endblock %}
+        </div>
     </div>
-    <div id="content">{% block content %}{% endblock %}</div>
-    <div id="footer" class="footer">
-        {% block footer %}
-            A <a href="http://www.fishackathon.co">fishackathon</a> creation.
-        {% endblock %}
+    <div class="container-fluid">
+        <div id="footer" class="footer">
+            {% block footer %}
+                A <a href="http://www.fishackathon.co"><img id="fishackathon_logo" class="footer-img" src="{{ url_for('static', filename='images/fishackathon_logo_small.png') }}"></a> creation.
+            {% endblock %}
+        </div>
     </div>
   </body>
 </html>

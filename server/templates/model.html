@@ -1,9 +1,9 @@
 {% extends "wrapper.html" %}
-{% block title %}{{ modelTitle }}{% endblock %}
+{% block title %}{{ modelDetails.title }}{% endblock %}
 {% block content %}
-  <p id="model-format">
-      {% if modelDetails %}
-        {{ modelDetails }}
-      {% endif %}
-  </p>
+    <div id="model" class="col-xs-9">
+        <div id="model_title" class="h2">{{ modelDetails.title }}</div>
+        <div id="model_description" class="h4">{{ modelDetails.description }}</div>
+        <div id="model_details" class="h4">{{ modelDetails.schema }}</div>
+    </div>
 {% endblock %}

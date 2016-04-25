@@ -1,5 +1,5 @@
 {
-  "title": "Fishackathon: Catch Object",
+  "title": "Catch Data",
   "description": "Details concerning the biological species sampled/collected during the operation. This will usually contain information about scientific and commmon name of species, weight, count as well as environment such as the water temperature, depth, salinity and dissolved oxygen levels and details about gear.",
   "schema": {
     "catchID": "",

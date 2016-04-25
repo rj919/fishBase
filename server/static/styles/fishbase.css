@@ -1,0 +1,37 @@
+/* Customized Styles for fishBase */
+
+body {
+  /* layout */
+    background: #22354c;
+    height: 100%;
+  /* typography*/
+    line-height: 1.42857143;
+    font-size: 14px;
+    color: #ffffff;
+    vertical-align: bottom;
+}
+.navbar {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ffffff;
+}
+.navbar-brand {
+    font-size: 32px;
+    color: #ffffff;
+    padding: 9px 0px 9px;
+    line-height: 1;
+}
+.navbar-subtitle {
+    float: right;
+    height: 50px;
+    padding: 25px 0px 9px;
+    line-height: 1;
+}
+.navbox-text { color: #1abc9c; }
+.footer {
+    bottom: 0px;
+    position: absolute;
+}
+.footer-img {
+    height: 36px;
+    width: auto;
+}
